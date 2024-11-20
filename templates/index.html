@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Generative AI Web Uygulaması</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Google Generative AI ile Metin Üret</h1>
+    <form id="generateForm">
+        <textarea name="input" placeholder="Buraya metni yazın..." required></textarea>
+        <button type="submit">Üret</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#generateForm').on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '/generate',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({input: $('textarea[name="input"]').val()}),
+                    success: function(data) {
+                        $('#response').html('<h3>Üretilen Metin:</h3><p>' + data.response + '</p>');
+                    },
+                    error: function() {
+                        $('#response').html('<p>Bir hata oluştu.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
