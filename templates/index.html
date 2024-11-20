@@ -3,17 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Generative AI Web Uygulaması</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>pentest AI Web Uygulaması</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group textarea {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            height: 100px;
+            resize: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-    <h1>Google Generative AI ile Metin Üret</h1>
-    <form id="generateForm">
-        <textarea name="input" placeholder="Buraya metni yazın..." required></textarea>
-        <button type="submit">Üret</button>
-    </form>
-    <div id="response"></div>
+    <div class="container">
+        <h1>pentest AI ile Metin Üret</h1>
+        <form id="generateForm">
+            <div class="form-group">
+                <textarea class="form-control" name="input" placeholder="Buraya metni yazın..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Üret</button>
+        </form>
+        <div id="response" class="response"></div>
+        <div class="footer">
+            <p>© 2023 pentest text generator AI Uygulaması. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#generateForm').on('submit', function(event) {
@@ -24,10 +82,10 @@
                     contentType: 'application/json',
                     data: JSON.stringify({input: $('textarea[name="input"]').val()}),
                     success: function(data) {
-                        $('#response').html('<h3>Üretilen Metin:</h3><p>' + data.response + '</p>');
+                        $('#response').html('<h5>Üretilen Metin:</h5><p>' + data.response + '</p>');
                     },
                     error: function() {
-                        $('#response').html('<p>Bir hata oluştu.</p>');
+                        $('#response').html('<p class="text-danger">Bir hata oluştu. Lütfen tekrar deneyin.</p>');
                     }
                 });
             });
